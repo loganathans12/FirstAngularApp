@@ -1,0 +1,155 @@
+<div [hidden]="isContactSelected" class="container contactListContainer">
+  <div class="well">
+    <div class="centerBlock">
+      Contacts
+    </div>
+
+    <!-- {{contacts | json}} -->
+
+    <div class="panel panel-success ">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>FAVORITE CONTACTS</strong></h3>
+      </div>
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row contactItem" *ngFor="let contact of contacts | favorite : true">
+
+
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+              <a *ngIf="contact?.smallImageURL != null || contact?.smallImageURL != ''" href="#" (click)="selectContact(contact)">
+                <img class="img-responsive img-rounded" id="imageList"
+                    src="{{contact?.smallImageURL}}"
+                    onError="this.src='assets/images/userLarge/User_Large.png'">
+                </a>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+              <div class="row">
+                <h4>
+                    <span class="glyphicon" [ngClass]="contact.isFavorite ? 'glyphicon-star': 'glyphicon-star-empty'"></span>
+                    {{contact.name}} 
+                </h4>
+              </div>
+              <div class="row"><span class="contactName" *ngIf="contact.companyName != null || contact.companyName != ''">{{contact?.companyName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-success ">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>OTHER CONTACTS</strong></h3>
+      </div>
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row contactItem" *ngFor="let contact of contacts | favorite : false">
+
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+              <a *ngIf="contact?.smallImageURL != null || contact?.smallImageURL != ''" href="#" (click)="selectContact(contact)">
+                <img class="img-responsive img-rounded" id="imageList"
+                    src="{{contact?.smallImageURL}}"
+                    onError="this.src='assets/images/userLarge/User_Large.png'">
+                </a>
+            </div>
+            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12">
+              <div class="row">
+                <h4>
+                  <span class="contactName">{{contact.name}}</span>
+                </h4>
+              </div>
+              <div class="row"><span class="contactName" *ngIf="contact.companyName != null || contact.companyName != ''">{{contact?.companyName}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div [hidden]="!isContactSelected" class="container contactItemContainer">
+  <div class="well">
+    <div class="panel panel-success ">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6"><a href="#" (click)="listContacts()">
+            <b>< Contacts</b></a></div>
+            <div class="col-lg-6 col-md-6">
+              <span class="pull-right">
+                <a href="#" (click)="updateContact();isFavorite = !isFavorite">
+                    <span [ngClass]="isFavorite ? 'btn btn-danger btn-sm': 'btn btn-success btn-sm' ">
+                       <span class="glyphicon" [ngClass]="isFavorite ? 'glyphicon-star': '' "></span>
+              <b>  {{isFavorite ?  'UnFavorite' : 'Favorite' }} </b>
+              </span>
+              </a>
+              </span>
+            </div>
+          </div>
+        </h3>
+      </div>
+
+      <div class="panel-body">
+        <div class="row centerBlockItem">
+          <div class="row imgCenter">
+            <img class="img-responsive img-rounded" id="imageList" src="{{selectedContact?.smallImageURL}}" onError="this.src='assets/images/userLarge/User_Large.png'">
+          </div>
+          <div class="row">
+            <h2>
+              {{selectedContact?.name}}
+            </h2>
+          </div>
+          <div class="row">
+            <h4>
+              {{selectedContact?.companyName}}
+            </h4>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">PHONE</span>
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6">{{ selectedContact?.phone?.home}}</div>
+            <div class="col-lg-6 col-md-6"><span class="pull-right">Home</span></div>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">PHONE</span>
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6">{{ selectedContact?.phone?.mobile}}</div>
+            <div class="col-lg-6 col-md-6"><span class="pull-right">Mobile</span></div>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">PHONE</span>
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6">{{ selectedContact?.phone?.work}}</div>
+            <div class="col-lg-6 col-md-6"><span class="pull-right">Work</span></div>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">ADDRESS</span>
+          <div class="row">
+            <div class="contentBold col-lg-12 col-md-12">{{ selectedContact?.address?.street }}</div>
+            <div class="contentBold col-lg-12 col-md-12">
+              {{ selectedContact?.address?.city}},{{ selectedContact?.address?.state}} {{ selectedContact?.address?.zipCode}}, {{ selectedContact?.address?.country}}
+            </div>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">BIRTH DATE</span>
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6">{{ selectedContact?.birthdate | date:'longDate'}}</div>
+          </div>
+        </div>
+        <div class="contactItemRow">
+          <span class="control-label">EMAIL</span>
+          <div class="row">
+            <div class="contentBold col-lg-6 col-md-6">{{ selectedContact?.emailAddress}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
