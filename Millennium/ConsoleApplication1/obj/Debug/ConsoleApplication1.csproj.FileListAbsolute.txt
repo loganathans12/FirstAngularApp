@@ -1,0 +1,6 @@
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
+C:\Loganathan\Millenium\Millennium\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
